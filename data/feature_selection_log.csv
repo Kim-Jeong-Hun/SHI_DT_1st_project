@@ -1,0 +1,33 @@
+﻿규칙,조치,변수,근거
+신규,생성,clean_beyond_2k,beyond_2k_ratio - oov_ratio. 오류 성분 분리로 r 0.049 → 0.252
+신규,기각,clean_soph_z,"표준화 이득 없음 (r 0.245 ≤ 0.252), 원재료와 r=0.899"
+R0,재계산,len_z_in_prompt,분할 전 전체 데이터 그룹통계로 계산되어 있었음 → train 기준 재계산 (기존값과 r=0.9965)
+R1,제거,num_words,파생변수로 대체: Token (r = 0.80)
+R1,제거,num_words3,파생변수로 대체: Token (r = 0.999)
+R1,제거,num_sent,파생변수로 대체: mean_sent_length 등 E군 구문 변수
+R1,제거,num_para,파생변수로 대체: sent_per_para 등 E군 구문 변수
+R1,제거,num_word_div_para,파생변수로 대체: mean_para_length (r = 0.9997)
+R1,제거,MTLD,파생변수로 대체: MTLD_valid (100토큰 미만 무효 처리 반영)
+R1,제거,TTR,"파생변수로 대체: ttr_ratio (TTR/100, 값이 동일)"
+R1,제거,Type,파생변수로 대체: guiraud = Type/√Token (길이 보정형)
+R1,제거,Token,파생변수로 대체: 길이 대표 변수로 [6-9]에서 재검토
+R1,제외,full_text,모델 입력 대상 아님 (원문·범주형·타겟)
+R1,제외,prompt,모델 입력 대상 아님 (원문·범주형·타겟)
+R1,제외,prompt_grouped,모델 입력 대상 아님 (원문·범주형·타겟)
+R1,제외,Vocabulary,모델 입력 대상 아님 (원문·범주형·타겟)
+R2,제거,k1_ratio,k1+k2+beyond_2k = 1 (완전 종속). 정보는 clean_beyond_2k와 k2_ratio가 승계
+R2,제거,beyond_2k_ratio,k1+k2+beyond_2k = 1 (완전 종속). 정보는 clean_beyond_2k와 k2_ratio가 승계
+R2,제거,function_word_ratio,lexical_density와 합이 1인 여집합. 부호만 반대인 동일 변수
+R3,제거,sent_length_max,sent_length_std와 r=0.954로 중복. r(Target) 열세 (-0.139 < -0.168)
+R3,제거,ttr_ratio,herdan_c와 r=0.943로 중복. r(Target) 열세 (-0.010 < +0.121)
+R3,제거,content_ttr,herdan_c와 r=0.909로 중복. r(Target) 열세 (+0.050 < +0.121)
+R3,제거,long_word_ratio,mean_word_length와 r=0.864로 중복. r(Target) 열세 (+0.210 < +0.232)
+R4,제거,n_pii,단변량 예측력 없음 (|r| = 0.030 < 0.1)
+R4,제거,repeat_bigram_ratio,단변량 예측력 없음 (|r| = 0.038 < 0.1)
+R4,제거,prompt_freq,단변량 예측력 없음 (|r| = 0.045 < 0.1)
+R4,제거,soph_z_in_prompt,단변량 예측력 없음 (|r| = 0.047 < 0.1)
+R4,제거,flag_len_outlier,단변량 예측력 없음 (|r| = 0.058 < 0.1)
+R4,제거,mean_para_length,단변량 예측력 없음 (|r| = 0.071 < 0.1)
+R4,제거,lexical_density,단변량 예측력 없음 (|r| = 0.095 < 0.1)
+R4,예외 유지,flag_very_short,MTLD_valid 대치 표시용. 예측이 아니라 정보 보존이 목적
+R5-보완,유지,len_z_in_prompt,Token 교체안은 VIF 10 초과로 기준 위반. 길이 통제 변수로 재해석해 유지

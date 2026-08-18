@@ -1,0 +1,64 @@
+{
+  "final_model": "ensemble(Lasso + RandomForest + GradientBoosting)",
+  "lasso_features": [
+    "MTLD_valid",
+    "guiraud",
+    "mean_word_length",
+    "mean_syllables",
+    "academic_suffix_ratio",
+    "oov_ratio",
+    "hapax_ratio",
+    "mean_sent_length",
+    "sent_per_para",
+    "sent_length_std",
+    "len_z_in_prompt",
+    "clean_beyond_2k"
+  ],
+  "rf_params": {
+    "min_samples_leaf": 10,
+    "max_features": 0.3,
+    "n_estimators": 300
+  },
+  "gb_params": {
+    "alpha": 0.9,
+    "ccp_alpha": 0.0,
+    "criterion": "deprecated",
+    "init": null,
+    "learning_rate": 0.05,
+    "loss": "squared_error",
+    "max_depth": 2,
+    "max_features": null,
+    "max_leaf_nodes": null,
+    "min_impurity_decrease": 0.0,
+    "min_samples_leaf": 1,
+    "min_samples_split": 2,
+    "min_weight_fraction_leaf": 0.0,
+    "n_estimators": 300,
+    "n_iter_no_change": null,
+    "random_state": 42,
+    "subsample": 1.0,
+    "tol": 0.0001,
+    "validation_fraction": 0.1,
+    "verbose": 0,
+    "warm_start": false
+  },
+  "cv_r2": 0.3251,
+  "cv_r2_std": 0.0417,
+  "test": {
+    "MAE": 0.3605,
+    "MSE": 0.2154,
+    "RMSE": 0.4641,
+    "R²": 0.3515
+  },
+  "step4_test": {
+    "MAE": 0.3637,
+    "MSE": 0.2185,
+    "RMSE": 0.4674,
+    "R²": 0.3421
+  },
+  "rejected": [
+    "표본 가중치 (전체 R² 손실)",
+    "윈저화 (이득 없음)",
+    "HistGradientBoosting (표본 규모 대비 과유연)"
+  ]
+}
